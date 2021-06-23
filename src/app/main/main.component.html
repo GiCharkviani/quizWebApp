@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row entrance">
+    <div class="col-12 ">
+      <div class="row internalContent">
+
+        <h4>Setting Up Quiz</h4>
+
+        <div class="row">
+          <div class="col-12">
+            <small><b style="color: #D77A61;">1st step</b>: choose a category</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Choose a topic</mat-label>
+              <mat-select [(ngModel)]='selectedValueId' name='categories'>
+                <mat-option *ngFor='let cat of categories.trivia_categories' value='{{cat.id}}'
+                  (click)='catToLocal(easy,medium,hard,numberi,sec)'>
+                  {{cat.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <ul class="statistics" *ngIf='numOfCat'>
+              <blockquote class="mb-1 mt-3"><b>Number of Questions According to Difficulty:</b></blockquote>
+              <li>Easy: <span> {{numOfCat.category_question_count.total_easy_question_count}}</span></li>
+              <li>Medium: <span>{{numOfCat.category_question_count.total_medium_question_count}}</span></li>
+              <li>Hard: <span>{{numOfCat.category_question_count.total_hard_question_count}}</span></li>
+              <li style="text-decoration: underline;">All Questions:
+                <span>{{numOfCat.category_question_count.total_question_count}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="mt-3">
+              <small><b style="color: #D77A61;">2nd step</b>: choose a difficulty</small>
+            </div>
+
+            <div class="radio-group">
+              <input type="radio" id="option-one" name="selector" disabled #easy class="hidden radio-label" type="radio"
+                [(ngModel)]='clickedValue' value="easy" name="accept-offers" (change)='diffToLocal(numberi)'>
+              <label for="option-one">easy</label>
+
+              <input type="radio" id="option-two" name="selector" disabled #medium [(ngModel)]='clickedValue'
+                value="medium" class="hidden radio-label" type="radio" name="accept-offers"
+                (change)='diffToLocal(numberi)'>
+              <label for="option-two">medium</label>
+
+              <input type="radio" id="option-three" name="selector" disabled #hard [(ngModel)]='clickedValue'
+                value="hard" class="hidden radio-label" type="radio" name="accept-offers"
+                (change)='diffToLocal(numberi)'>
+              <label for="option-three">hard</label>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="mt-3" style="height: 6vh; overflow: hidden;">
+              <small title="must be according to quantity of questions ny difficulty"><b style="color: #D77A61;">3rd
+                  step</b>: choose a number of
+                questions</small>
+            </div>
+
+            <input type="number" class="numQuest" (input)='checkSpell(numberi,start)' placeholder="quest num"
+              [(ngModel)]='takenQuestNum' #numberi disabled>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="mt-3" style="height: 6vh; overflow: hidden;">
+              <small><b style="color: #D77A61;">4th step</b>: choose a time (sec) for each question (optional)</small>
+            </div>
+            <input type="number" class="numSec" placeholder="optional" [(ngModel)]='time' #sec disabled>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <p class="note mt-3" style="color:grey">*Note: you will be able to start the quiz only when the number of
+              questions you have written is valid (neither 0, nor null).</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary gilaki" routerLink="/quiz" (click)='startQuiz()' #start
+              disabled>Start</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

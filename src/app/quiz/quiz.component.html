@@ -1,0 +1,56 @@
+<div class="container-fluid">
+
+    <!--during quiz-->
+    <div class="row quizSide" *ngIf='nextBtn'>
+
+        <div *ngIf='time > -1' class="rowtime">
+            <h2>{{time}}</h2>
+        </div>
+
+        <div class="row questBox">
+            <div class="col-12">
+                <p class="question">{{quizAll.results[this.countQuest].question}}</p>
+            </div>
+        </div>
+
+        <div class="row answersBox">
+            <div class="col-12">
+                <form class="answers">
+                    <label *ngFor='let answer of quizAll.results[this.countQuest].incorrect_answers'>
+                        <input [(ngModel)]='markedAnswer' value="{{answer}}" type="radio" name="radio" />
+                        <span class="answersHere">{{answer}}</span>
+                    </label>
+                </form>
+            </div>
+        </div>
+
+        <div class="row buttonsBox">
+            <div class="col-12">
+                <button *ngIf='nextBtn' (click)='nextQuestion()' type="button" class=" mt-3 buttonMy"><i class="fas fa-arrow-circle-right fa-3x"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!--submit button-->
+
+    <div *ngIf='submitBtn' class="row">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary mt-3 buttonSubmit" (click)='submitNow()'>
+                <span><i class="fas fa-user-graduate"></i></span>
+                <hr>
+                Submit
+            </button>
+        </div>
+    </div>
+    <!--showing results-->
+    <div *ngIf='showResults' class="container resultsBox">
+        <div class="row">
+            <div class="col-12">
+                <p class="resultMark">{{corAnswCalc}}<sub class="small">Correct Answer</sub></p>
+            </div>
+            <button routerLink='/main' class="btn btn-outline-success buttonHome mt-3"><i
+                    class="fas fa-home"></i></button>
+        </div>
+    </div>
+
+</div>
